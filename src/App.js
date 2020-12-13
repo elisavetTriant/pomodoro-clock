@@ -1,4 +1,4 @@
-import React, { useState, useRef, createRef } from "react";
+import React, { useState, useRef } from "react";
 import PomodoroControl from "./components/PomodoroControl"
 import {accurateInterval} from "./utils/helpers.js"
 import './App.css';
@@ -11,8 +11,9 @@ function App() {
   const [timerOn, setTimerOn] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
   const myAudio = useRef();
-  const displayTimerRef = createRef();
+  const displayTimerRef = useRef();
   const timeoutRef = useRef();
+  const onBreakRef = useRef();
 
   //do the countdown
   const timerControl = () => {
@@ -36,7 +37,7 @@ function App() {
   
 
   const phaseControl = () => {
-      let time = displayTime;      
+      let time = null;      
       
       setDisplayTime((prev) => {
         displayTimerRef.current = prev
@@ -49,22 +50,26 @@ function App() {
 
       if (time <= 0) {
 
+       setOnBreak((prev) => {
+        onBreakRef.current = prev
+        return !prev
+       })
+
        if (timeoutRef.current) {
             timeoutRef.current.cancel()
-            console.log("canceled")
+            //console.log("canceled")
 
-            setOnBreak((prev) => !prev)
-
-            if (!onBreak) {
-              //console.log("breaktime:" + breakTime);
-              setDisplayTime(breakTime)
-              playBuzzer()
-            } else {
+            if (onBreakRef.current === true) {
               //console.log("sessionTime" + sessionTime);
-              setDisplayTime(sessionTime)
+              displayTimerRef.current = sessionTime;
+              playBuzzer()
+            } else if (onBreakRef.current === false){
+              //console.log("breaktime:" + breakTime);
+              displayTimerRef.current = breakTime;
               playBuzzer()
             }
 
+            setDisplayTime(displayTimerRef.current)
             beginCountDown()
         }
       }
