@@ -31,7 +31,7 @@ header {
   padding: 20px;
 }
 header .session {
-  font-size: .8em;
+  font-size: 1.2em;
   display: flex;
 }
 header .session .breakCtrl, header .session .sessionCtrl {
@@ -48,7 +48,7 @@ header .session .minus, header .session .plus {
   outline: none;
 }
 header .session .time {
-  font-size: 2.5em;
+  font-size: 2em;
   padding-left: 10px;
   padding-right: 10px;
 }

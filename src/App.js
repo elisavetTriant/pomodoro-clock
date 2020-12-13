@@ -13,7 +13,8 @@ function App() {
   const myAudio = useRef();
   const displayTimerRef = useRef();
   const timeoutRef = useRef();
-  const onBreakRef = useRef();
+  const onBreakRef = useRef(null);
+  const displayVisualTimerRef = useRef();
 
   //do the countdown
   const timerControl = () => {
@@ -35,23 +36,34 @@ function App() {
     //console.log(timeoutRef.current.timeoutID)
   }
   
+  const displayElapsedPercentage = (isBreak, currentTick) => {
+    let percentage = "0%"
+    if (isBreak) {
+      percentage = Math.abs(((currentTick - breakTime) / breakTime) * 100) + '%'
+    }else {
+      percentage = Math.abs(((currentTick - sessionTime) / sessionTime) * 100) + '%'
+    }
+    displayVisualTimerRef.current = percentage;
+    console.log(displayVisualTimerRef.current);
+  }
+
 
   const phaseControl = () => {
-      let time = null;      
-      
+      let time;     
+
       setDisplayTime((prev) => {
         displayTimerRef.current = prev
         return prev - 1
       });
       
       time = displayTimerRef.current;
-
       //console.log(time)
 
       if (time <= 0) {
 
        setOnBreak((prev) => {
-        onBreakRef.current = prev
+        let previousState = prev
+        onBreakRef.current = !previousState
         return !prev
        })
 
@@ -59,20 +71,24 @@ function App() {
             timeoutRef.current.cancel()
             //console.log("canceled")
 
-            if (onBreakRef.current === true) {
+            if (onBreakRef.current === false) {
               //console.log("sessionTime" + sessionTime);
               displayTimerRef.current = sessionTime;
               playBuzzer()
-            } else if (onBreakRef.current === false){
+            } else if (onBreakRef.current === true){
               //console.log("breaktime:" + breakTime);
               displayTimerRef.current = breakTime;
               playBuzzer()
             }
 
             setDisplayTime(displayTimerRef.current)
+            
             beginCountDown()
+
         }
       }
+
+      displayElapsedPercentage(onBreakRef.current, time)
   } 
 
   //Reset Pomodoro
@@ -157,7 +173,7 @@ function App() {
         <div className="timer">
           <p id="timer-label" className="title">{onBreak ? "Break" : "Session"}</p>
           <p id="time-left" ref={displayTimerRef}>{formatTime(displayTime)}</p>
-          <span className="fill" ng-style="{'height':fillHeight, 'background':fillColor }"></span>
+          <span className="fill" style={{height: displayVisualTimerRef.current}}></span>
         </div>
         <div className="timer_controls">
             <button id="start_stop" onClick = {() => timerControl()}>{!timerOn? "Start" : "Pause"}</button> 
