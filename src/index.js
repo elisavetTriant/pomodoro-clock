@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Credits from './components/Credits';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  	<React.Fragment>
+	    <App />
+	    <Credits />
+    </React.Fragment>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -10,6 +10,7 @@ export const accurateInterval = function (fn, time) {
   cancel = function () {
     return clearTimeout(timeout);
   };
+  // eslint-disable-next-line
   timeoutID = function () {
     return timeout;
   };

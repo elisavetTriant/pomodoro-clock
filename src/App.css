@@ -4,7 +4,7 @@
   font-family: "Roboto Mono", monospace;
 }
 
-html, body, main {
+html, body{
   height: 100%;
   background-color: #212121;
   display: flex;
@@ -57,7 +57,6 @@ header .session .time {
 
 section {
   background-color: #212121;
-  height: 100%;
   color: #fff;
 }
 section .title {
@@ -123,4 +122,24 @@ section .fill {
   background: #ffffff;
   border: 2px solid #1976D2 !important;
   color: #494949 !important;
+}
+
+#footer {
+  color: #ffffff;
+  text-align: center;
+  padding: 2rem 0.8rem;
+}
+
+#footer p {
+  line-height: 1.2rem;
+  padding: 1rem 0;
+}
+
+#footer a, #footer a:link {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#footer a:hover, #footer a:focus {
+    color: #1976D2;
 }
