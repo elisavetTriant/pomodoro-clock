@@ -6,8 +6,10 @@
 
 html, body, main {
   height: 100%;
-  overflow: hidden;
   background-color: #212121;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
@@ -17,8 +19,8 @@ h1 {
   color: white;
   text-align: center;
   font-family: "Roboto Mono", monospace;
-  font-size: 2em;
-  margin-top: 1em
+  font-size: 1em;
+  margin: 0.8em 0.4em
 }
 
 header {
@@ -28,27 +30,27 @@ header {
   margin: 0 auto;
   color: #fff;
   text-transform: uppercase;
-  padding: 20px;
+  padding: 10px;
 }
 header .session {
-  font-size: 1.2em;
+  font-size: 0.7em;
   display: flex;
 }
 header .session .breakCtrl, header .session .sessionCtrl {
   display: inline;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 header .session .minus, header .session .plus {
   background-color: #212121;
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 2em;
+  font-size: 1.8em;
   outline: none;
 }
 header .session .time {
-  font-size: 2em;
+  font-size: 1.8em;
   padding-left: 10px;
   padding-right: 10px;
 }

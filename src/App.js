@@ -44,7 +44,7 @@ function App() {
       percentage = Math.abs(((currentTick - sessionTime) / sessionTime) * 100) + '%'
     }
     displayVisualTimerRef.current = percentage;
-    console.log(displayVisualTimerRef.current);
+    //console.log(displayVisualTimerRef.current);
   }
 
 
@@ -80,11 +80,8 @@ function App() {
               displayTimerRef.current = breakTime;
               playBuzzer()
             }
-
-            setDisplayTime(displayTimerRef.current)
-            
+            setDisplayTime(displayTimerRef.current)           
             beginCountDown()
-
         }
       }
 
@@ -103,6 +100,7 @@ function App() {
     }
     myAudio.current.pause();
     myAudio.current.currentTime = 0;
+    displayVisualTimerRef.current = "0%"
   }
 
 //Pomodoro settings function
